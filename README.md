@@ -1,4 +1,4 @@
-# AiAcademy_Flask_ToDo
+# AiAcademy_Django_ToDo
 AiAcademyの「FlaskとMySQLでToDoアプリを実装しよう」をDjangoとSQLite3で実装
 
 ### バックエンド
