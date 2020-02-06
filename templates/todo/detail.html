@@ -1,0 +1,7 @@
+<h1>タスク詳細</h1>
+<form method="post">
+    <input type="button" value="戻る" onClick="javascript:history.go(-1);">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <p><input type="submit" value="保存"></p>
+</form>

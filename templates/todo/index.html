@@ -1,0 +1,27 @@
+<h1>Todo</h1>
+
+<a href="{% url 'todo:new' %}">新しいToDoの追加</a>
+
+<h2>進行中</h2>
+{% for todo in in_progress_todo %}
+<ul>
+    {{ todo.todo_name }}
+
+    作成日: {{ todo.todo_create_date }}
+
+    <a href="{% url 'todo:detail' todo_id=todo.id %}">編集</a>
+
+    <a href="{% url 'todo:done' todo_id=todo.id %}">完了</a>
+</ul>
+{% endfor %}
+
+<h2>完了済</h2>
+{% for todo in done_todo %}
+<ul>
+    <a href="{% url 'todo:detail' todo_id=todo.id %}">{{ todo.todo_name}}</a>
+
+    作成日: {{ todo.todo_create_date }}
+
+    完了日: {{todo.todo_done_date}}
+</ul>
+{% endfor %}

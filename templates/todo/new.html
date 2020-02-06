@@ -1,0 +1,7 @@
+<h1>新しいToDoの作成</h1>
+<form action="" method="post">
+    <input type="button" value="戻る" onClick="javascript:history.go(-1);">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="作成">
+</form>
