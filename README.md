@@ -6,4 +6,4 @@ AiAcademyの「FlaskとMySQLでToDoアプリを実装しよう」をDjangoとSQL
 - DB: SQLite3 
 
 ### フロントエンド
-- Template: Django HTML
+- Template: Django HTML、Django-Bootstrap4
