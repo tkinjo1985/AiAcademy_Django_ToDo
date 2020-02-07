@@ -2,28 +2,22 @@ import datetime
 
 from django.shortcuts import redirect, render, reverse
 from django.views import View
+from django.views.generic import TemplateView
 
 from .forms import NewCreateTodo
 from .models import ToDo
 
 
-class Index(View):
+class Index(TemplateView):
+    template_name = 'todo/index.html'
 
-    def get(self, request):
-        # 未完了ToDoの取得(todo_done_flag=0)
-        in_progress_todo = ToDo.objects.filter(
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["in_progress_todo"] = ToDo.objects.filter(
             todo_done_flag=0).order_by('-todo_create_date')
-
-        #　完了済ToDoの取得(todo_done_flag=1)
-        done_todo = ToDo.objects.filter(
+        context["done_todo"] = ToDo.objects.filter(
             todo_done_flag=1).order_by('-todo_create_date')
-
-        context = {
-            'in_progress_todo': in_progress_todo,
-            'done_todo': done_todo
-        }
-
-        return render(request, 'todo/index.html', context)
+        return context
 
 
 class New(View):
