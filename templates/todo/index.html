@@ -1,12 +1,12 @@
-{% extends 'todo/base.html' %}
-
-{% load bootstrap4 %}
+{% extends 'base.html' %}
 
 {% block title %}
-    ToDo
+    ToDo - Home
 {% endblock %}
 
+
 {% block content %}
+<h1> ToDo </h1>
 
 <a href="{% url 'todo:new' %}" class="btn btn-primary btn-sm my-3">新しいToDoの追加</a>
 <table class="table table-striped table-bordered">
@@ -23,9 +23,9 @@
         <tr>
             <td>{{ todo.id }}</td>
 
-            <td>{{ todo.todo_name }}</td>
+            <td>{{ todo.name }}</td>
 
-            <td>{{ todo.todo_create_date }}</td>
+            <td>{{ todo.create_date }}</td>
 
             <td>
                 <a href="{% url 'todo:detail' todo_id=todo.id %}" class='btn btn-outline-primary btn-sm'>編集</a>
@@ -42,18 +42,25 @@
             <th scope="col">ToDo名</th>
             <th scope="col">作成日</th>
             <th scope="col">完了日</th>
+            <th scope="col">操作</th>
         </tr>
       </thead>
     {% for todo in done_todo %}
         <tr>
              <td>{{ todo.id }}</td>
 
-             <td>{{ todo.todo_name }}</td>
+             <td>{{ todo.name }}</td>
 
-            <td>{{ todo.todo_create_date }}</td>
+            <td>{{ todo.create_date }}</td>
 
-            <td>{{todo.todo_done_date}}</td>
+            <td>{{todo.done_date}}</td>
+
+            <td>
+                <a href="{% url 'todo:detail' todo_id=todo.id %}" class='btn btn-outline-primary btn-sm'>編集</a>
+                <a href="{% url 'todo:delete' todo_id=todo.id %}" class='btn btn-outline-danger btn-sm'>削除</a>
+            </td>
         </tr>
     {% endfor %}
 </table>
+
 {% endblock %}

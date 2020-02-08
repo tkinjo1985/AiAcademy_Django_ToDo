@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+{% extends 'todo/bootstrap.html' %}
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    {% block bootstrap4_content %}
+    {% load bootstrap4 %}
+    <div class="container">
+        {% block content %}(no content){% endblock %}
+    </div>
+    {% endblock %}
+</body>
+</html>

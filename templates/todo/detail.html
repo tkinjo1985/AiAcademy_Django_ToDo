@@ -1,16 +1,18 @@
-{% extends 'todo/base.html' %}
-
-{% load bootstrap4 %}
+{% extends 'base.html' %}
 
 {% block title %}
-    ToDoの詳細
-{% endblock %}
+    ToDo - Detail
+{% endblock  %}
 
 {% block content %}
+{% load bootstrap4 %}
+    <h1>ToDoの詳細</h1>
+
     <form method="post">
         <a href="{% url 'todo:index'%}" class="btn btn-primary btn-sm my-3">戻る</a>
         {% csrf_token %}
         {% bootstrap_form form %}
         {% buttons submit='保存' %}{% endbuttons %}
     </form>
+
 {% endblock %}

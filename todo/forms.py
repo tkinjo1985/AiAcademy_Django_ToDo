@@ -1,5 +1,7 @@
 from django import forms
 
+# from .models import ToDo
+
 
 class NewCreateTodo(forms.Form):
     todo_name = forms.CharField(
