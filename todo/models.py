@@ -7,8 +7,8 @@ class ToDo(models.Model):
         db_table = 'todo'
 
     name = models.CharField(max_length=200)
-    content = models.CharField(max_length=1000)
-    is_done = models.BooleanField(default=False)
+    content = models.CharField(max_length=10000)
     create_date = models.TextField()
     done_date = models.TextField()
+    is_done = models.BooleanField(default=False)
     is_hidden = models.BooleanField(default=False)
