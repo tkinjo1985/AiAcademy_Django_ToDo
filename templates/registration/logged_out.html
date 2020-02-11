@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Logout{% endblock %}
+
+{% block content %}
+
+<div class="text-center">
+    <h2>ログアウトしました</h2>
+    <p><a href="{% url 'login' %}">再度ログインする</a></p>
+</div>
+
+{% endblock %}

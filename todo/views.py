@@ -4,27 +4,28 @@ from django.shortcuts import get_object_or_404, redirect, reverse
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import FormView, TemplateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .forms import NewCreateTodo
 from .models import ToDo
 
 
-class Index(TemplateView):
+class Index(LoginRequiredMixin, TemplateView):
     template_name = 'todo/index.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         # 未完了ToDoの取得
         context["in_progress_todo"] = ToDo.objects.filter(
-            is_done=False).filter(is_hidden=False).order_by('-id')
+            is_done=False, is_hidden=False).order_by('-id')
         # 完了済ToDoの取得
         context["done_todo"] = ToDo.objects.filter(
-            is_done=True).filter(is_hidden=False).order_by('create_date')
+            is_done=True, is_hidden=False).order_by('create_date')
 
         return context
 
 
-class New(FormView):
+class New(LoginRequiredMixin, FormView):
     template_name = 'todo/new.html'
     form_class = NewCreateTodo
     success_url = reverse_lazy('todo:index')
@@ -37,8 +38,11 @@ class New(FormView):
 
         return super().form_valid(form)
 
+    def form_invalid(self, form):
+        return super().form_invalid(form)
 
-class Detail(FormView):
+
+class Detail(LoginRequiredMixin, FormView):
     template_name = 'todo/detail.html'
     form_class = NewCreateTodo
     success_url = reverse_lazy('todo:index')
@@ -64,8 +68,11 @@ class Detail(FormView):
 
         return super().form_valid(form)
 
+    def form_invalid(self, form):
+        return super().form_invalid(form)
 
-class Done(View):
+
+class Done(LoginRequiredMixin, View):
 
     def get(self, request, todo_id):
         # モデルからレコードを取得
@@ -79,7 +86,7 @@ class Done(View):
         return redirect(reverse('todo:index'))
 
 
-class Delete(View):
+class Delete(LoginRequiredMixin, View):
 
     def get(self, request, todo_id):
         # モデルからレコードを取得し非表示に設定

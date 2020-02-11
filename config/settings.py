@@ -27,6 +27,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+# ログイン後トップページにリダイレクト
+LOGIN_REDIRECT_URL = '/todo'
+
 
 # Application definition
 
@@ -38,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'todo',
-    'bootstrap4'
+    'bootstrap4',
+    'accounts.apps.AccountsConfig'
 ]
 
 MIDDLEWARE = [

@@ -14,12 +14,10 @@
     <a href="{% url 'todo:index'%}" class="btn btn-primary btn-sm my-3 text-left">戻る</a>
 
     <form method="post" class="form">
-        <div class='form-group'>
-            {% csrf_token %}
-            {% bootstrap_form form %}
-            <div class="text-center">
-                <input class="btn btn-success" type="submit" value="作成">
-            </div>
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <div class="text-center">
+            <input class="btn btn-success" type="submit" value="作成">
         </div>
     </form>
 </div>
