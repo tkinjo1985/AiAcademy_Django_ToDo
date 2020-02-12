@@ -3,6 +3,7 @@
 {% load bootstrap4 %}
 
 {% block content %}
+
 <div class="text-center">
     <h2>Sign up</h2>
 </div>
@@ -12,5 +13,15 @@
         {% bootstrap_form form %}
         <button type="submit" class="submit">Sign up</button>
     </div>
+
+    {# エラーメッセージを表示 #}
+    {% if form.errors %}
+        {% for field in form %}
+            {% for error in field.errors %}
+                <p>{{ error }}</p>
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
 </form>
+
 {% endblock %}

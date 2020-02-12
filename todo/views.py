@@ -3,7 +3,7 @@ import datetime
 from django.shortcuts import get_object_or_404, redirect, reverse
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import FormView, TemplateView
+from django.views.generic import FormView, TemplateView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .forms import NewCreateTodo
@@ -25,7 +25,7 @@ class Index(LoginRequiredMixin, TemplateView):
         return context
 
 
-class New(LoginRequiredMixin, FormView):
+class New(LoginRequiredMixin, CreateView):
     template_name = 'todo/new.html'
     form_class = NewCreateTodo
     success_url = reverse_lazy('todo:index')

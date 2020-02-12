@@ -10,7 +10,7 @@
     <h1> ToDo </h1>
 
     <a href="{% url 'todo:new' %}" class="text-left btn btn-primary btn-sm my-3">新しいToDoの追加</a>
-    <a href="{% url 'logout' %}" class="text-right btn btn-primary btn-sm my-3">ログアウト</a>
+    <a href="{% url 'accounts:logout' %}" class="text-right btn btn-primary btn-sm my-3">ログアウト</a>
 
     {% comment %} 進行中のToDoを表示するテーブル {% endcomment %}
     <div class="in_progress_todo">

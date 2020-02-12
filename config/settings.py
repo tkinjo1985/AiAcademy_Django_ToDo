@@ -25,10 +25,13 @@ SECRET_KEY = 'g+_@20^da-#e&y1fxk+^hl^bkp*1!!o)y05bs8cfrv!!5l_v_('
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 
-# ログイン後トップページにリダイレクト
+# ログイン後のリダイレクト先
 LOGIN_REDIRECT_URL = '/todo'
+
+# ログアウト後のリダイレクト先
+LOGOUT_REDIRECT_URL = '/accounts/login'
 
 
 # Application definition
@@ -40,9 +43,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'todo',
+
+    # My App
+    'todo.apps.TodoConfig',
+    'accounts.apps.AccountsConfig',
+
     'bootstrap4',
-    'accounts.apps.AccountsConfig'
 ]
 
 MIDDLEWARE = [
@@ -74,6 +80,12 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'config.wsgi.application'
+
+##################
+# Authentication #
+##################
+
+AUTH_USER_MODEL = 'accounts.CustomUser'
 
 
 # Database
