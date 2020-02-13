@@ -5,13 +5,13 @@
 {% block content %}
 
 <div class="text-center">
-    <h2>Sign up</h2>
+    <h2>ユーザー登録</h2>
 </div>
 <form method="post">
     <div class="col-md-6 offset-md-3">
         {% csrf_token %}
         {% bootstrap_form form %}
-        <button type="submit" class="submit">Sign up</button>
+        <input type="submit" value="登録">
     </div>
 
     {# エラーメッセージを表示 #}
