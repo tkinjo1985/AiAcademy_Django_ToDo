@@ -1,20 +1,15 @@
-import datetime
-
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import get_object_or_404, redirect, render, reverse
 from django.urls import reverse_lazy
+from django.utils import timezone
 from django.views import View
 from django.views.generic import CreateView, TemplateView, UpdateView
 
 from .forms import ToDoForm
 from .models import ToDo
 
-import json
 
-from django.utils import timezone
-
-
-class UserIdCheck(UserPassesTestMixin):
+class UserCheck(UserPassesTestMixin):
     """
     ログインユーザーとToDo所有ユーザーの適合チェック
 
@@ -84,7 +79,7 @@ class New(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class Update(LoginRequiredMixin, UserIdCheck, UpdateView):
+class Update(LoginRequiredMixin, UserCheck, UpdateView):
     """
     ToDo更新View:
     GETアクセス時は登録済ToDoをフォームの初期値に設定
@@ -117,12 +112,12 @@ class Update(LoginRequiredMixin, UserIdCheck, UpdateView):
         return initial
 
 
-class Done(LoginRequiredMixin, UserIdCheck, View):
+class Done(LoginRequiredMixin, UserCheck, View):
     """
     ToDo完了処理View:
     """
 
-    def get(self, request, pk):
+    def get(self, request, _pk):
         """
         ToDoを完了済ステータスに変更する
 
@@ -132,9 +127,9 @@ class Done(LoginRequiredMixin, UserIdCheck, View):
         todoのid
         """
         # モデルからレコードを取得
-        todo = get_object_or_404(ToDo, pk=pk)
+        todo = get_object_or_404(ToDo, pk=_pk)
 
-        #　現在時刻(ToDo完了時刻)と完了フラグを設定し保存
+        # 現在時刻(ToDo完了時刻)と完了フラグを設定し保存
         todo.done_date = timezone.now()
         todo.is_done = True
         todo.save()
@@ -142,12 +137,12 @@ class Done(LoginRequiredMixin, UserIdCheck, View):
         return redirect(reverse('todo:index'))
 
 
-class Delete(LoginRequiredMixin, UserIdCheck, View):
+class Delete(LoginRequiredMixin, UserCheck, View):
     """
     ToDo削除処理View
     """
 
-    def get(self, request, pk):
+    def get(self, request, _pk):
         """
         ToDoを削除(非表示に)する
 
@@ -157,7 +152,7 @@ class Delete(LoginRequiredMixin, UserIdCheck, View):
         todoのid
         """
         # モデルからレコードを取得し非表示に設定
-        todo = get_object_or_404(ToDo, pk=pk)
+        todo = get_object_or_404(ToDo, pk=_pk)
         # 非表示フラグをTrueに設定
         todo.is_hidden = True
         todo.save()

@@ -9,7 +9,7 @@ from .serializer import ToDoSerializer
 class ToDoViewSet(viewsets.ViewSet):
 
     # GETリクエスト(ユーザーの全てのtodoを取得)
-    def list(self, request, format=None):
+    def list(self, request):
         todo = ToDo.objects.filter(user_id=request.user.id)
         todo = ToDoSerializer(todo, many=True)
 
@@ -36,7 +36,6 @@ class ToDoViewSet(viewsets.ViewSet):
 
     # POSTリクエストで新規ToDoの追加
     def create(self, request):
-        print(request.data)
         serializer = ToDoSerializer(data=request.data)
 
         if serializer.is_valid():
