@@ -25,14 +25,13 @@ SECRET_KEY = 'g+_@20^da-#e&y1fxk+^hl^bkp*1!!o)y05bs8cfrv!!5l_v_('
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*', 'testserver']
 
 # ログイン後のリダイレクト先
 LOGIN_REDIRECT_URL = '/'
 
 # ログアウト後のリダイレクト先
 LOGOUT_REDIRECT_URL = '/accounts/login'
-
 
 # Application definition
 
@@ -47,8 +46,11 @@ INSTALLED_APPS = [
     # My App
     'todo.apps.TodoConfig',
     'accounts.apps.AccountsConfig',
+    'api',
+    'rest_framework',
 
     'bootstrap4',
+    'django_extensions'
 ]
 
 MIDDLEWARE = [
@@ -86,6 +88,15 @@ WSGI_APPLICATION = 'config.wsgi.application'
 ##################
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+    ),
+}
 
 
 # Database
@@ -136,6 +147,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+    [
+        os.path.join(BASE_DIR, "static"),
+    ]
+)
 
 # Settings for django-bootstrap4
 BOOTSTRAP4 = {
