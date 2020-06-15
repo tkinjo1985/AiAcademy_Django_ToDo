@@ -117,7 +117,7 @@ class Done(LoginRequiredMixin, UserCheck, View):
     ToDo完了処理View:
     """
 
-    def get(self, request, _pk):
+    def get(self, request, pk):
         """
         ToDoを完了済ステータスに変更する
 
@@ -127,7 +127,7 @@ class Done(LoginRequiredMixin, UserCheck, View):
         todoのid
         """
         # モデルからレコードを取得
-        todo = get_object_or_404(ToDo, pk=_pk)
+        todo = get_object_or_404(ToDo, pk=pk)
 
         # 現在時刻(ToDo完了時刻)と完了フラグを設定し保存
         todo.done_date = timezone.now()
@@ -142,7 +142,7 @@ class Delete(LoginRequiredMixin, UserCheck, View):
     ToDo削除処理View
     """
 
-    def get(self, request, _pk):
+    def get(self, request, pk):
         """
         ToDoを削除(非表示に)する
 
@@ -152,7 +152,7 @@ class Delete(LoginRequiredMixin, UserCheck, View):
         todoのid
         """
         # モデルからレコードを取得し非表示に設定
-        todo = get_object_or_404(ToDo, pk=_pk)
+        todo = get_object_or_404(ToDo, pk=pk)
         # 非表示フラグをTrueに設定
         todo.is_hidden = True
         todo.save()

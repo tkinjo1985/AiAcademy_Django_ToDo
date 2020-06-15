@@ -1,6 +1,6 @@
+from rest_framework.serializers import Serializer
 from rest_framework import status, viewsets
 from rest_framework.response import Response
-
 from todo.models import ToDo
 
 from .serializer import ToDoSerializer
