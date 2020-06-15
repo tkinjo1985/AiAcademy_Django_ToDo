@@ -17,6 +17,14 @@ $ cd AiAcademy_Django_ToDo
 $ python manager.py makemigrations
 $ python manager.py migrate
 $ python manager.py runserver
+
+# Dockerを使用する場合
+$ git clone https://github.com/tkinjo1985/AiAcademy_Django_ToDo.git
+$ cd AiAcademy_Django_ToDo
+# Docker imageを作成
+$ docker build -t 'image名' 
+# Docker コンテナを作成
+# docker run -it --rm -v $(pwd):/workdir -p 8000:8000 'Docker image名'
 ```
 
 ### REST APIの使用方法
