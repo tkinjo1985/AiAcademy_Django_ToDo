@@ -24,7 +24,7 @@ $ cd AiAcademy_Django_ToDo
 # Docker imageを作成
 $ docker build -t 'image名' 
 # Docker コンテナを作成
-# docker run -it --rm -v $(pwd):/workdir -p 8000:8000 'Docker image名'
+$ docker run -it --rm -v $(pwd):/workdir -p 8000:8000 'Docker image名'
 ```
 
 ### REST APIの使用方法
