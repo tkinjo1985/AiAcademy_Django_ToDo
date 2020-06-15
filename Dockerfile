@@ -16,8 +16,4 @@ RUN pip install --upgrade pip && pip install \
 # ポート
 EXPOSE 8000
 
-# webサーバー起動
-ENTRYPOINT [ "python", "manage.py", "runserver"]
-
-# 必要に応じてrunコマンド実行時に書き換え
-CMD ["0.0.0.0:8000"]
+CMD ["/bin/bash"]

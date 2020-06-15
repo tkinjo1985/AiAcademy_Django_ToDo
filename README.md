@@ -12,19 +12,22 @@ AiAcademyの「FlaskとMySQLでToDoアプリを実装しよう」をDjangoとSQL
 ### 使い方
 
 ```
+# リポジトリをクローン
 $ git clone https://github.com/tkinjo1985/AiAcademy_Django_ToDo.git
 $ cd AiAcademy_Django_ToDo
-$ python manager.py makemigrations
-$ python manager.py migrate
-$ python manager.py runserver
 
-# Dockerを使用する場合
-$ git clone https://github.com/tkinjo1985/AiAcademy_Django_ToDo.git
-$ cd AiAcademy_Django_ToDo
 # Docker imageを作成
-$ docker build -t 'image名' 
+$ docker build -t 'image名' .
+
 # Docker コンテナを作成
-$ docker run -it --rm -v $(pwd):/workdir -p 8000:8000 'Docker image名'
+$ docker run -it -v $(pwd):/workdir -p 8000:8000 'image名'
+
+# コンテナ内でdbのmigrateを行う
+$ python manage.py makemigrations
+$ python manage.py migrate
+
+# サーバー起動
+$ python manage.py runserver 0.0.0.0:8000
 ```
 
 ### REST APIの使用方法
