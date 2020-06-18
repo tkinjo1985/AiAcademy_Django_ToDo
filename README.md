@@ -2,28 +2,26 @@
 AiAcademyの「FlaskとMySQLでToDoアプリを実装しよう」をDjangoとSQLite3で実装
 
 ### バックエンド
-- Webフレームワーク: Django
+- Webフレームワーク: Django(Dcokerコンテナを使用)
 - DB: SQLite3 
 - REST API: rest_framework
 
 ### フロントエンド
-- Template: Django HTML、Django-Bootstrap4
+- Template: DjangoHTML、Django-Bootstrap4
 
 ### 使い方
-
 ```
 # リポジトリをクローン
 $ git clone https://github.com/tkinjo1985/AiAcademy_Django_ToDo.git
 $ cd AiAcademy_Django_ToDo
 
-# Docker imageを作成
-$ docker build -t 'image名' .
+# docker-composeでコンテナを起動
+$ docker-compose up --build -d
 
-# Docker コンテナを作成
-$ docker run -it -v $(pwd):/workdir -p 8000:8000 'image名'
+# コンテナ内へ接続
+$ docker-compose exec web bash
 
-# コンテナ内でdbのmigrateを行う
-$ python manage.py makemigrations
+# dbのマイグレーションを行う
 $ python manage.py migrate
 
 # サーバー起動
