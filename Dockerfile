@@ -5,13 +5,10 @@ FROM python:latest
 WORKDIR /workdir
 
 # pipをアップグレード
-RUN pip install --upgrade pip && pip install \
-    bootstrap4 \
-    Django \
-    djangorestframework \
-    djangorestframework-jwt \
-    django-extensions \
-    django-bootstrap4
+RUN pip install --upgrade pip
+
+COPY requirements.txt /workdir
+RUN pip install -r requirements.txt
 
 # ポート
 EXPOSE 8000

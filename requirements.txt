@@ -1,0 +1,6 @@
+bootstrap4
+Django
+djangorestframework
+djangorestframework-jwt
+django-extensions
+django-bootstrap4
