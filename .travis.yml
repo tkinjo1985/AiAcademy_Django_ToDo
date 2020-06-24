@@ -17,3 +17,5 @@ defroy:
     docker build -t registry.heroku.com/$HEROKU_APP_NAME/web -f Dockerfile.prod .;
     docker push registry.heroku.com/$HEROKU_APP_NAME/web;
     docker run --app $HEROKU_APP_NAME python manage.py migrate;
+  on:
+    branch: master
