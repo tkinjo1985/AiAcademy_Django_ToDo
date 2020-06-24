@@ -4,3 +4,4 @@ djangorestframework
 djangorestframework-jwt
 django-extensions
 django-bootstrap4
+lxml
