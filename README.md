@@ -17,15 +17,6 @@ $ cd AiAcademy_Django_ToDo
 
 # docker-composeでコンテナを起動
 $ docker-compose up --build -d
-
-# コンテナ内へ接続
-$ docker-compose exec web bash
-
-# dbのマイグレーションを行う
-$ python manage.py migrate
-
-# サーバー起動
-$ python manage.py runserver 0.0.0.0:8000
 ```
 
 ### REST APIの使用方法

@@ -1,11 +1,33 @@
 version: "3"
 
+volumes:
+  dbdata:
+
 services:
   web:
-    build: .
+    build:
+      context: docker/web
     ports:
       - "8000:8000"
     volumes:
-      - ".:/workdir"
+      - .:/workdir
+    command: >
+      bash -c "python manage.py migrate &&
+      python manage.py runserver 0.0.0.0:8000"
+    tty: true
+    stdin_open: true
+    depends_on:
+      - db
+    links:
+      - db
+
+  db:
+    build:
+      context: docker/db
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+      - POSTGRES_PASSWORD=hrcwn098
+    volumes:
+      - dbdata:/var/lib/postgresql/data
     tty: true
     stdin_open: true
