@@ -11,5 +11,3 @@ RUN pip install --upgrade pip
 
 COPY requirements.txt /workdir
 RUN pip install -r requirements.txt
-
-CMD [ "/bin/bash" ]
