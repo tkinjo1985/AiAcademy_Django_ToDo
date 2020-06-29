@@ -5,6 +5,9 @@ language: python
 services:
   - docker
 
+before_script:
+  - sudo /etc/init.d/postgresql stop
+
 before_install:
   - docker-compose up --build -d
 
