@@ -8,4 +8,4 @@ before_install:
   - docker-compose -f docker-compose.dev.yml up --build -d
 
 script:
-  - ddocker-compose -f docker-compose.dev.yml exec web python manage.py test
+  - docker-compose -f docker-compose.dev.yml exec web python manage.py test
