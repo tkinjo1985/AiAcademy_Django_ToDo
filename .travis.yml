@@ -1,0 +1,9 @@
+sudo: required
+
+services: docker
+
+before_install:
+  - docker-compose -f docker-compose.dev.yml up --build -d
+
+script:
+  - docker-compose exec web python manage.py test

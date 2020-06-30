@@ -6,3 +6,5 @@ django-extensions
 django-bootstrap4
 lxml
 psycopg2
+django-environ
+gunicorn

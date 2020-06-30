@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+  web:
+    build:
+      context: docker/web
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/workdir
+    command: >
+      bash -c "python manage.py migrate &&
+              python manage.py runserver 0.0.0.0:8000"
+    tty: true
+    stdin_open: true

@@ -9,21 +9,21 @@ services:
       context: docker/web
     ports:
       - "8000:8000"
+    environment:
+      - DJANGO_SETTINGS_MODULE=config.prod
     volumes:
       - .:/workdir
     command: >
-      bash -c "python manage.py makemigrations &&
-              python manage.py migrate &&
-              python manage.py runserver 0.0.0.0:8000"
+      bash -c 'python manage.py migrate &&
+                gunicorn config.wsgi:application --bind 0.0.0.0:8000'
     tty: true
     stdin_open: true
     depends_on:
       - db
-    links:
-      - db
 
   db:
-    image: postgres:latest
+    build:
+      context: docker/db
     environment:
       - POSTGRES_HOST_AUTH_METHOD=trust
       - POSTGRES_PASSWORD=hrcwn098
