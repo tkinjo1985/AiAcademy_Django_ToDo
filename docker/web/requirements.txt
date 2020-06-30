@@ -8,3 +8,4 @@ lxml
 psycopg2
 django-environ
 gunicorn
+dj_database_url
