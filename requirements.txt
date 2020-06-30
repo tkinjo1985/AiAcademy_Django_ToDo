@@ -1,3 +1,4 @@
+dj_database_url
 bootstrap4
 Django
 djangorestframework
@@ -6,3 +7,4 @@ django-extensions
 django-bootstrap4
 lxml
 psycopg2
+gunicorn
