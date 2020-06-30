@@ -6,6 +6,16 @@ services: docker
 
 before_install:
   - docker-compose -f docker-compose.dev.yml up --build -d
+  - docker login -u "$HEROKU_USERNAME" -p "$HEROKU_API_KEY" registry.heroku.com
 
 script:
   - docker-compose -f docker-compose.dev.yml exec web python manage.py test
+
+deploy:
+  provider: script
+  script:
+    docker build -t registry.heroku.com/$HEROKU_APP_NAME/web -f docker/web/Dockerfile.prod .;
+    docker push registry.heroku.com/$HEROKU_APP_NAME/web;
+    heroku run --app registry.heroku.com/$HEROKU_APP_NAME/web gunicorn config.wsgi:application --bind 0.0.0.0:8000
+  on:
+    branch: master
