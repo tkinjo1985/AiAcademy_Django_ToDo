@@ -2,22 +2,12 @@ import environ
 import dj_database_url
 from .base import *
 
-DEBUG = True
+DEBUG = False
 
 env = environ.Env()
 SECRET_KEY = env('SECRET_KEY')
 
-# # Database
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'postgres',
-#         'USER': 'postgres',
-#         'PASSWORD': 'hrcwn098',
-#         'HOST': 'db',
-#         'PORT': 5432,
-#     }
-# }
+ALLOWED_HOSTS = env('ALLOWED_HOSTS')
 
 db_from_env = dj_database_url.config()
 DATABASES = {
