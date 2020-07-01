@@ -2,7 +2,7 @@ import environ
 import dj_database_url
 from .base import *
 
-DEBUG = False
+DEBUG = True
 
 env = environ.Env()
 SECRET_KEY = env('SECRET_KEY')
