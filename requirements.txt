@@ -8,3 +8,4 @@ django-bootstrap4
 lxml
 psycopg2
 gunicorn
+django-environ
