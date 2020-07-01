@@ -11,12 +11,22 @@ before_install:
 script:
   - docker-compose -f docker-compose.dev.yml exec web python manage.py test
 
+# deploy:
+#   provider: script
+#   skip_cleanup: true
+#   script: heroku login;
+#     heroku git:remote --app $HEROKU_APP_NAME;
+#     git push heroku master;
+#     heroku run python manage.py migrate;
+#   on:
+#     branch: master
+
 deploy:
   provider: script
   skip_cleanup: true
-  script: heroku login;
-    heroku git:remote --app $HEROKU_APP_NAME;
-    git push heroku master;
-    heroku run python manage.py migrate;
+  script:
+    docker build -t registry.heroku.com/$HEROKU_APP_NAME/web -f Dockerfile .;
+    docker push registry.heroku.com/$HEROKU_APP_NAME/web;
+    heroku run --app registry.heroku.com/$HEROKU_APP_NAME/web python manage.py migrate
   on:
     branch: master
