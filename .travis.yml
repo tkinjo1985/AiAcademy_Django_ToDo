@@ -17,7 +17,6 @@ deploy:
   script: heroku login;
     heroku git:remote --app $HEROKU_APP_NAME;
     git push heroku master;
-    heroku ps:scale web=0;
     heroku run python manage.py migrate;
     heroku run gunicorn config.wsgi:application --bind 0.0.0.0:8000;
   on:
