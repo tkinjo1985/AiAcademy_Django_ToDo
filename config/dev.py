@@ -6,7 +6,6 @@ DEBUG = True
 env = environ.Env()
 env.read_env(os.path.join(BASE_DIR, '.env'))
 SECRET_KEY = env('SECRET_KEY')
-# SECRET_KEY = 'g+_@20^da-#e&y1fxk+^hl^bkp*1!!o)y05bs8cfrv!!5l_v_('
 
 ALLOWED_HOSTS = ['*', 'testserver']
 
