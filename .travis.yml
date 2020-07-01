@@ -6,16 +6,17 @@ services: docker
 
 before_install:
   - docker-compose -f docker-compose.dev.yml up --build
+  - touch .env
+  - echo SECRET_KEY=$SECRET_KEY >> .env
 
 script:
   - docker-compose -f docker-compose.dev.yml exec web python manage.py test
-
-deploy:
-  provider: script
-  skip_cleanup: true
-  script: heroku login;
-    heroku git:remote --app $HEROKU_APP_NAME;
-    git push heroku master;
-    heroku run python manage.py migrate;
-  on:
-    branch: master
+# deploy:
+#   provider: script
+#   skip_cleanup: true
+#   script: heroku login;
+#     heroku git:remote --app $HEROKU_APP_NAME;
+#     git push heroku master;
+#     heroku run python manage.py migrate;
+#   on:
+#     branch: master
