@@ -6,7 +6,6 @@ services: docker
 
 before_install:
   - docker-compose -f docker-compose.dev.yml up --build -d
-  - docker login -u "$HEROKU_USERNAME" -p "$HEROKU_API_KEY" registry.heroku.com
 
 script:
   - docker-compose -f docker-compose.dev.yml exec web python manage.py test
