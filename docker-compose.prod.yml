@@ -11,11 +11,12 @@ services:
       - "8000:8000"
     environment:
       - DJANGO_SETTINGS_MODULE=config.prod
+      - SECRET_KEY='g+_@20^da-#e&y1fxk+^hl^bkp*1!!o)y05bs8cfrv!!5l_v_('
     volumes:
       - .:/workdir
-    command: >
-      bash -c 'python manage.py migrate &&
-                gunicorn config.wsgi:application --bind 0.0.0.0:8000'
+    # command: >
+    #   bash -c 'python manage.py migrate &&
+    #             gunicorn config.wsgi:application --bind 0.0.0.0:8000'
     tty: true
     stdin_open: true
     depends_on:
