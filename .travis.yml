@@ -5,6 +5,9 @@ before_install:
   - sudo apt-get update
   - sudo apt-get install -y ruby ruby-dev
   - sudo gem install travis
+  - sudo gem pristine executable-hooks --version 1.5.0
+  - sudo gem pristine gem-wrappers --version 1.4.0
+  - sudo gem pristine nokogiri --version 1.10.2
   - yes | travis encrypt $(heroku auth:token) --add deploy.api_key
   - touch .env
   - echo SECRET_KEY=$SECRET_KEY >> .env
