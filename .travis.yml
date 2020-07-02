@@ -8,6 +8,8 @@ before_install:
   - sudo gem pristine executable-hooks --version 1.5.0
   - sudo gem pristine gem-wrappers --version 1.4.0
   - sudo gem pristine nokogiri --version 1.10.2
+  - sudo gem pristine ffi --version 1.13.1
+  - sudo gem pristine json --version 2.3.1
   - yes | travis encrypt $(heroku auth:token) --add deploy.api_key
   - touch .env
   - echo SECRET_KEY=$SECRET_KEY >> .env
