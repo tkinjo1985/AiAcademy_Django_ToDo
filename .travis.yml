@@ -14,9 +14,9 @@ deploy:
   provider: heroku
   skip_cleanup: true
   app: ai-django-todo
+  api_key:
+    secure: $HEROKU_API_KEY
   run:
     - python manage.py migrate
   on:
     branch: master
-  # api_key:
-  #   secure: Bt/4SzROsLvjLUDUDA3lW6L+0unhQgZylm0EB5ML2zovBZ3nMNKNEtn/ocgp2zCWHD45AAp2MJvocIkyamqqoxoKL5KEZkFbJ29NoZLhaHPEm/ba0wUQOclR8YINvvAT8+A63pmdR5vshBVlUFN0T6do7j1SPRkIuAKYk03HhDB18X4AGOnIVf7j9XHqe77oezHdEmwkf9IwNAk0Yl7L9bt4FWGoUmlKvFV/VnCckUnaqF2M5fBnFSZIIiFhDFMHyYct4oWKvgycPIHEi1ROy0PFsxZqj0YXixsyvUMtLFWYEnnjBAVBrycd4gTLxJaDG1NiD7rNR5z5NjnfEWiqGAemd3KKwWsaT6szCsQHqapH8aiTMCYBvXmmQClph05oPmrfQwbdTjqoUNJYBfAqP5KpsozMtM6sZg89hwNbpEY77GHQR+IiXEB7DBgJ4btT2bkXvzIHXKVttqCCEMpWBOlOiba6eGu8I8hM0IBD0v3zYiL7Z/kgWh6ERdBV9AF52wJQ/6DznBL1WsRGpXHkTAdLmq025cVc79hqZ2u/C2Y5x9ftClPGb2qsZ5GNriy/Kfmkzu41uE6UrcX0n1Jky7ZDSe+l+3Pb/P70h7e+8cxKBGasf+uXU9MpmFFOTXkbU38i/8MxL4BdEFUmM7P49JY67PwELvONBIiKEdEKZSo=
