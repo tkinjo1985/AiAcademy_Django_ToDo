@@ -2,18 +2,21 @@ sudo: required
 language: python
 services: docker
 before_install:
-- touch .env
-- echo SECRET_KEY=$SECRET_KEY >> .env
-- docker-compose -f docker-compose.dev.yml up --build -d
+  - apt-get install -y ruby ruby-dev
+  - sudo gem install travis
+  - travis version
+  - touch .env
+  - echo SECRET_KEY=$SECRET_KEY >> .env
+  - docker-compose -f docker-compose.dev.yml up --build -d
 script:
-- docker-compose -f docker-compose.dev.yml exec web python manage.py test
-deploy:
-  provider: heroku
-  skip_cleanup: true
-  app: ai-django-todo
-  api_key:
-    secure: H06KihJxdiSs+bDf973EOZVoZAk0pFljOiex9ZlstUzOO/yJT/9JrYNO1DEvZGGWfA5NJfVcZs76YDoMicsZuKfDOw3fdSo/w8rfEgqTZsL/uruZ3iki012LqRv2Efs9nHTZWxxIj1WpxJN7UG+9Ge4pbFQYa+3VRYoG5Z44VaJrpocwPRyuXLFBTNNRWJ7xEAef/O2pC9CobSANuBlFnAumQV+Xiuye9A1UT6STL8lNiaJ8LErhExa4q//IjFjy4z7WCCrX7IDC1PZSexf1j5NrCTkjoLay2KMQ7ehd5MTkr9lx25UbrlDUHq98+WTHHKK3ror97CoHujORJeTaUw33MSpVGOc3WeJzd7OEDNtoOZaDgpJ6akMAGMeczGRMnh/J9SkkEu01W1IFL2uyAsM+m08uLpr0c7CVGXk8szEppItqkorUC+/SaM3260wRUTlGI/47vY7Hejel2n7qsLV5phxVuz1zOeBwggTuxv7rAfWaooLQ3vHADusuL5byghVREDCodyllkH4tnS3U93LJobMAhYyc1HNOupowvR8bBoJzGvkLzP56HSuZtKdADAC8jm2BJL0HqxjHClJnUnYNGQU1WO0keWJsi7qusZDSIhgyYnCGnm1vsajMCNiQuiOfQZU84e3bVNsCyYd9yCWwH3Ao18BKb696Fgc1uhc=
-  run:
-  - python manage.py migrate
-  on:
-    branch: master
+  - docker-compose -f docker-compose.dev.yml exec web python manage.py test
+# deploy:
+#   provider: heroku
+#   skip_cleanup: true
+#   app: ai-django-todo
+#   api_key:
+#     secure: H06KihJxdiSs+bDf973EOZVoZAk0pFljOiex9ZlstUzOO/yJT/9JrYNO1DEvZGGWfA5NJfVcZs76YDoMicsZuKfDOw3fdSo/w8rfEgqTZsL/uruZ3iki012LqRv2Efs9nHTZWxxIj1WpxJN7UG+9Ge4pbFQYa+3VRYoG5Z44VaJrpocwPRyuXLFBTNNRWJ7xEAef/O2pC9CobSANuBlFnAumQV+Xiuye9A1UT6STL8lNiaJ8LErhExa4q//IjFjy4z7WCCrX7IDC1PZSexf1j5NrCTkjoLay2KMQ7ehd5MTkr9lx25UbrlDUHq98+WTHHKK3ror97CoHujORJeTaUw33MSpVGOc3WeJzd7OEDNtoOZaDgpJ6akMAGMeczGRMnh/J9SkkEu01W1IFL2uyAsM+m08uLpr0c7CVGXk8szEppItqkorUC+/SaM3260wRUTlGI/47vY7Hejel2n7qsLV5phxVuz1zOeBwggTuxv7rAfWaooLQ3vHADusuL5byghVREDCodyllkH4tnS3U93LJobMAhYyc1HNOupowvR8bBoJzGvkLzP56HSuZtKdADAC8jm2BJL0HqxjHClJnUnYNGQU1WO0keWJsi7qusZDSIhgyYnCGnm1vsajMCNiQuiOfQZU84e3bVNsCyYd9yCWwH3Ao18BKb696Fgc1uhc=
+#   run:
+#     - python manage.py migrate
+#   on:
+#     branch: master
