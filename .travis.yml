@@ -2,19 +2,18 @@ sudo: required
 language: python
 services: docker
 before_install:
-  - touch .env
-  - echo SECRET_KEY=$SECRET_KEY >> .env
-  - docker-compose -f docker-compose.dev.yml up --build -d
+- touch .env
+- echo SECRET_KEY=$SECRET_KEY >> .env
+- docker-compose -f docker-compose.dev.yml up --build -d
 script:
-  - docker-compose -f docker-compose.dev.yml exec web python manage.py test
-
+- docker-compose -f docker-compose.dev.yml exec web python manage.py test
 deploy:
   provider: heroku
   skip_cleanup: true
   app: ai-django-todo
-  api_key:
-    secure: w45k4b/J2TaTYJ0pMeIRvX3+S0heQ0MRcWW/WkHZwW7/Cnp05KZAqsVzV/5wOXdiySdm5LprE65mh9HjWijxybCj1CPkTmlkdcu/cn8nk/cOs5SDjhcjCFJVl1EdwS4NMQ1D840eLb7xO7QiXlWc3rjA2tVRK9n2fEM4SvdB0nASqe1NrFVegDoCOPvNRNKQGJdfE7OkRvSRFIq2zdM3J3nd797/GwdArZK//ipUKXxO8qi5vOYhWHHR+8c2eAaGBPqvOzGJPfYpis9ksXH4Y3m3BclK0HeISIjOqKNfcluUTmFMilZn9m6BvxIVfMZwejsLjs0D94ulKELODjgFOh9wkXQ7VND2ZBCnRyPiq/Vu7HmHpXY53HSbthL5jG8J9Wu5cGXtnIginkzVhjV0jp8JX0SbneRWHXl1UkAJDqhTxtibnVrHy6yDfNa4Wx0vgqS6FFBoIXi5hHx/XHoYd/GLnuvBUImkrXWSelSWQVDBDmsCZFu4B9UAuA22cdP362xMWtnHA++6Nrjbi1pM2xkr13YN1BZH1iCanSWc/uwlKLgTHkYFKg90glq6rGECEpelFiLacnlBH+RhST1DBKDUBMi1O5hFbCYbPTVdgsgQsaEQykz2RzjBy28NEhWaJHXWET4ptPnN5xwY+RVcjEUc8a/m8xNRncSusR8cF/k=
   run:
-    - "python manage.py migrate"
+  - python manage.py migrate
   on:
     branch: master
+  api_key:
+    secure: Bt/4SzROsLvjLUDUDA3lW6L+0unhQgZylm0EB5ML2zovBZ3nMNKNEtn/ocgp2zCWHD45AAp2MJvocIkyamqqoxoKL5KEZkFbJ29NoZLhaHPEm/ba0wUQOclR8YINvvAT8+A63pmdR5vshBVlUFN0T6do7j1SPRkIuAKYk03HhDB18X4AGOnIVf7j9XHqe77oezHdEmwkf9IwNAk0Yl7L9bt4FWGoUmlKvFV/VnCckUnaqF2M5fBnFSZIIiFhDFMHyYct4oWKvgycPIHEi1ROy0PFsxZqj0YXixsyvUMtLFWYEnnjBAVBrycd4gTLxJaDG1NiD7rNR5z5NjnfEWiqGAemd3KKwWsaT6szCsQHqapH8aiTMCYBvXmmQClph05oPmrfQwbdTjqoUNJYBfAqP5KpsozMtM6sZg89hwNbpEY77GHQR+IiXEB7DBgJ4btT2bkXvzIHXKVttqCCEMpWBOlOiba6eGu8I8hM0IBD0v3zYiL7Z/kgWh6ERdBV9AF52wJQ/6DznBL1WsRGpXHkTAdLmq025cVc79hqZ2u/C2Y5x9ftClPGb2qsZ5GNriy/Kfmkzu41uE6UrcX0n1Jky7ZDSe+l+3Pb/P70h7e+8cxKBGasf+uXU9MpmFFOTXkbU38i/8MxL4BdEFUmM7P49JY67PwELvONBIiKEdEKZSo=
