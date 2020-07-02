@@ -2,17 +2,18 @@ sudo: required
 language: python
 services: docker
 before_install:
-- touch .env
-- echo SECRET_KEY=$SECRET_KEY >> .env
-- docker-compose -f docker-compose.dev.yml up --build -d
+  - touch .env
+  - echo SECRET_KEY=$SECRET_KEY >> .env
+  - yes | travis encrypt $(heroku auth:token) --add deploy.api_key
+  - docker-compose -f docker-compose.dev.yml up --build -d
 script:
-- docker-compose -f docker-compose.dev.yml exec web python manage.py test
+  - docker-compose -f docker-compose.dev.yml exec web python manage.py test
 deploy:
   provider: heroku
   skip_cleanup: true
   app: ai-django-todo
   run:
-  - python manage.py migrate
+    - python manage.py migrate
   on:
     branch: master
   api_key:
