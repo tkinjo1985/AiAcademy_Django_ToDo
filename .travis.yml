@@ -8,7 +8,6 @@ before_install:
   # - yes | travis encrypt $(heroku auth:token) --add deploy.api_key
   - docker-compose -f docker-compose.dev.yml up --build -d
 script:
-  - travis version
   - docker-compose -f docker-compose.dev.yml exec web python manage.py test
 deploy:
   provider: heroku
