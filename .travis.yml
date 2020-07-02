@@ -6,6 +6,7 @@ before_install:
   - echo SECRET_KEY=$SECRET_KEY >> .env
   # - yes | travis encrypt $(heroku auth:token) --add deploy.api_key
   - sudo apt-get install -y travis
+  - travis version
   - docker-compose -f docker-compose.dev.yml up --build -d
 script:
   - docker-compose -f docker-compose.dev.yml exec web python manage.py test
