@@ -15,5 +15,6 @@ deploy:
   script: heroku container:login;
     heroku container:push web --app $HEROKU_APP_NAME;
     heroku container:release web --app $HEROKU_APP_NAME;
+    heroku run --app $HEROKU_APP_NAME python manage.py migrate
   on:
     branch: master
