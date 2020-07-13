@@ -12,4 +12,4 @@ RUN pip install --upgrade pip
 COPY requirements.txt /workdir
 RUN pip install -r requirements.txt
 
-COPY . .
+CMD [ "gunicorn", "config.wsgi", "--log-file", "-" ]

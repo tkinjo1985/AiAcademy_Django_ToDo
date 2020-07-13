@@ -1,0 +1,10 @@
+.env
+.travis.yml
+.git
+.vscode
+.DS_Store
+.gitignore
+.docker-compose.yml
+.Dockerfile.dev
+.README.md
+.ipynb_checkpoints

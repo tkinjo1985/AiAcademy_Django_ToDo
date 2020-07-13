@@ -1,18 +1,19 @@
 import environ
 from .base import *
 
-DEBUG = True
 
+# .envからSECRET_KEYを読み込む
 env = environ.Env()
 env.read_env(os.path.join(BASE_DIR, '.env'))
 SECRET_KEY = env('SECRET_KEY')
 
+# 開発時はデバッグをTrueにする
+DEBUG = True
+
+# 全てのホストからのアクセスを許可
 ALLOWED_HOSTS = ['*', 'testserver']
 
-# Database
+# .envからDatabaseを読み込む
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    'default': env.db()
 }

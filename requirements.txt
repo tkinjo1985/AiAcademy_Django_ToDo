@@ -5,7 +5,7 @@ djangorestframework
 djangorestframework-jwt
 django-extensions
 django-bootstrap4
+django-environ
+gunicorn
 lxml
 psycopg2
-gunicorn
-django-environ

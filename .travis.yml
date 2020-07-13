@@ -4,16 +4,17 @@ services: docker
 before_install:
   - touch .env
   - echo SECRET_KEY=$SECRET_KEY >> .env
-  - docker-compose -f docker-compose.dev.yml up --build -d
+  - echo DATABASE_URL=$DATABASE_URL >> .env
+  - docker-compose up --build -d
 script:
-  - docker-compose -f docker-compose.dev.yml exec web python manage.py test
+  - docker-compose -f docker-compose.yml exec web python manage.py test
+
 deploy:
-  provider: heroku
+  provider: script
   skip_cleanup: true
-  app: ai-django-todo
-  api_key:
-    secure: XE8B/n3BR9xY82DpM3iz1Kv2HiBBkgb7kXDjRGGdrml+otfGBvmG5pYhflh8T0ONz/GiOb2PFnhULmfBH4t8J6EH60+P4D/6s1EIe5kfJKxRw7Axy++vCTXvfvrszFS/kuHMwjKrb7/TaPyleUlQh20Vn0UfjbhlF3fJfHV1HDEmHh0e8oOifJHgqaxWlhxnUHNeeeNnJ5WSoXgNIQvxbVZXuRqkhfttzBqK2i0KIz53cV10QsXrCtFjzrn82mKchdlehgsgje5Q+32tpHOeEUDRHuamPJXnPt6q7gf3BTQZBYr+XuzJ4aVKXqSmyYn5U6Nt2pgL+PQNY7FW1iosc++K51kcZzZPe8n5hNpJADAceCaZA3DYkTr1wv4MFfzYY2cXtVK3iwBRZMzZgUKWXEVH/W1mMtWSF5fTCNeb+Y2pPtHxz0hpRgSip640FT1PmnVFluk/P4QfcTrSbmWUTXsgTMUGMXNMvFrrXYtfvskjScmgioG6rXWnl0/LYZumdXzbuwwQwY+yibtQFif86BlCA3ZFsPXLUQkLu/6yJC1s/juBCOJsLKzlmJu8hjnmTO8iQUXguNuNe1SZU/7cz7WV6/F25P1+g+vciC+5yd6YMlny6UJodjH/63iFfd77hP/SNscvb6tcpFcgFGR3oVFxdrDx+kk9gpdlQpqRbvQ=
-  run:
-    - python manage.py migrate
+  script: heroku container:login;
+    heroku container:push web --app $HEROKU_APP_NAME;
+    heroku container:release web --app $HEROKU_APP_NAME;
+    heroku run --app $HEROKU_APP_NAME python manage.py migrate
   on:
     branch: master
