@@ -7,7 +7,7 @@ before_install:
   - echo DATABASE_URL=$DATABASE_URL >> .env
   - docker-compose up --build -d
 script:
-  - docker-compose -f docker-compose.yml exec web python manage.py test
+  - docker-compose exec web python manage.py test
 
 deploy:
   provider: script
